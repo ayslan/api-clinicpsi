@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Psi.Domain.Entities
+namespace Psi.Domain.Models
 {
-    public class Teste : BaseEntity<int, Teste>
+    public class CreateTesteModel
     {
         public string Name { get; set; }
         public string Cpf { get; set; }
         public string Sobrenome { get; set; }
         public string ABC { get; set; }
+        public int Idade { get; set; }
     }
 }

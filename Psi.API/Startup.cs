@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Psi.Domain.Entities;
 using Psi.Domain.Interfaces;
+using Psi.Domain.Models;
+using Psi.Domain.Models.Validators;
 using Psi.Infra.Data.Context;
 using Psi.Infra.Data.Repository;
 
@@ -39,9 +43,15 @@ namespace Psi.API
           .AddEntityFrameworkStores<AppDBContext>()
           .AddDefaultTokenProviders();
 
-            services.AddScoped<ITesteRepository, TesteRepository>();
-
+            //services.AddScoped<ITesteRepository, TesteRepository>();
             services.AddControllers();
+
+            services
+                .AddMvc()
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<CreateTesteModelValidator>();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +60,17 @@ namespace Psi.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDBContext>();
+
+                // auto migration
+                context.Database.Migrate();
+
+                // Seed the database.
+                //InitializeUserAndRoles(context);
             }
 
             app.UseHttpsRedirection();

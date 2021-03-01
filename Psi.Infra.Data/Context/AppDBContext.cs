@@ -23,7 +23,6 @@ namespace Psi.Infra.Data.Context
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>(new ApplicationUserMap().Configure);
-            builder.Entity<Teste>(new TesteMap().Configure);
         }
     }
 }

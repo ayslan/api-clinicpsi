@@ -7,12 +7,5 @@ namespace Psi.Domain.Interfaces
 {
     public interface ITesteRepository
     {
-        void Save(Teste obj);
-
-        void Remove(int id);
-
-        Teste GetById(int id);
-
-        IList<Teste> GetAll();
     }
 }
