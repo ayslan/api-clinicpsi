@@ -12,6 +12,7 @@ namespace Psi.Infra.Data.Mapping
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder.HasKey(c => c.Id);
+            builder.Property(x => x.Name).IsRequired();
         }
     }
 }
