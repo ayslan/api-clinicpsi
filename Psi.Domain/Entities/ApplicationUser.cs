@@ -13,9 +13,9 @@ namespace Psi.Domain.Entities
         public string PhoneAux { get; set; }
         public string CPF { get; set; }
         public string CRP { get; set; }
-        public DateTime BirthDate { get; set; }
-        public UserTypeEnum Type { get; set; }
-        public UserStatusEnum Status { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public UserTypeEnum? Type { get; set; }
+        public UserStatusEnum? Status { get; set; }
+        public DateTime? CreationDate { get; set; }
     }
 }

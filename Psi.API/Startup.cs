@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Psi.Domain.AutoMapper;
 using Psi.Domain.Entities;
 using Psi.Domain.Interfaces;
 using Psi.Domain.Models;
@@ -72,13 +73,13 @@ namespace Psi.API
             services.AddLocalApiAuthentication();
             services.AddControllers().AddNewtonsoftJson();
 
-            //var config = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.AddProfile(new DomainToViewModelProfile());
-            //    cfg.AddProfile(new ViewModelToDomainProfile());
-            //});
-            //IMapper mapper = config.CreateMapper();
-            //services.AddSingleton(mapper);
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DomainToModelProfile());
+                cfg.AddProfile(new ModelToDomainProfile());
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             //Add Swagger
             services.AddSwaggerGen(c =>
