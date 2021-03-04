@@ -3,7 +3,9 @@ using IdentityServer4;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Psi.API.Base;
+using Psi.API.Data;
 using Psi.Domain.Entities;
 using Psi.Domain.Models.User;
 using Psi.Infra.CrossCutting;
@@ -21,13 +23,15 @@ namespace Psi.API.Controllers
     [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
     public class AccountController : BaseController
     {
+        private readonly AppConfiguration _appConfiguration;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IMapper mapper)
+        public AccountController(UserManager<ApplicationUser> userManager, IMapper mapper, IOptions<AppConfiguration> appConfiguration)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _appConfiguration = appConfiguration.Value;
         }
 
         [HttpPost]

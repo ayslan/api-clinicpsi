@@ -20,7 +20,7 @@
     "Psi.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/default",
+      "launchUrl": "http://localhost:5000/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
