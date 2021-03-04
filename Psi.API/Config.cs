@@ -12,13 +12,10 @@ namespace Psi.API
     {
         static IConfiguration Configuration = Startup.StaticConfig;
 
-        public static IEnumerable<ApiScope> GetApiScopes()
+        public static IEnumerable<ApiScope> ApiScopes = new List<ApiScope>
         {
-            return new List<ApiScope>
-            {
-                new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
-            };
-        }
+            new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
+        };
 
         public static IEnumerable<Client> Clients = new List<Client>
         {
