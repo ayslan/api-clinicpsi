@@ -12,6 +12,15 @@ namespace Psi.API
     {
         static IConfiguration Configuration = Startup.StaticConfig;
 
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
+            {
+                // backward compat
+                new ApiScope("api")
+            };
+        }
+
         public static IEnumerable<Client> Clients = new List<Client>
         {
             new Client
@@ -31,7 +40,7 @@ namespace Psi.API
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        IdentityServerConstants.LocalApi.ScopeName },
+                        "api" },
 
                 }
         };

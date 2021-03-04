@@ -75,7 +75,7 @@ namespace Psi.API
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryClients(Config.Clients)
-                .AddInMemoryApiResources(Config.Apis)
+                .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddAspNetIdentity<ApplicationUser>();
 
             services.AddLocalApiAuthentication();
