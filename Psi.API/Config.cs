@@ -16,8 +16,7 @@ namespace Psi.API
         {
             return new List<ApiScope>
             {
-                // backward compat
-                new ApiScope("api")
+                new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
         }
 
@@ -40,7 +39,7 @@ namespace Psi.API
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        "api" },
+                        IdentityServerConstants.LocalApi.ScopeName },
 
                 }
         };
@@ -50,12 +49,6 @@ namespace Psi.API
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
-        };
-
-        public static IEnumerable<ApiResource> Apis = new List<ApiResource>
-        {
-            // local API
-            new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
         };
     }
 }

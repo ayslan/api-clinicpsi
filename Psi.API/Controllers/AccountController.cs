@@ -20,7 +20,7 @@ namespace Psi.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
+    [Authorize]
     public class AccountController : BaseController
     {
         private readonly AppConfiguration _appConfiguration;
