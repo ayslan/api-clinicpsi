@@ -16,7 +16,7 @@ namespace Psi.Domain.Models.User
         public string CRP { get; set; }
         public DateTime? BirthDate { get; set; }
         public UserTypeEnum? Type { get; set; }
-        public UserStatusEnum? Status { get; set; }
+        public AccessStatusEnum? Status { get; set; }
         public DateTime? CreationDate { get; set; }
     }
 }

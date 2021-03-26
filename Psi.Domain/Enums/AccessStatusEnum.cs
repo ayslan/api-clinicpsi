@@ -1,6 +1,6 @@
 ﻿namespace Psi.Domain.Enums
 {
-    public enum UserStatusEnum
+    public enum AccessStatusEnum
     {
         Inactive = 0,
         Active = 1
