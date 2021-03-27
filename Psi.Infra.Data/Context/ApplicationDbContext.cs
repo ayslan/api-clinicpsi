@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Psi.Domain.Entities;
-using Psi.Infra.Data.Mapping;
+using Psi.Infra.Data.Mappings;
 using System;
 using System.Collections.Generic;
 using System.Text;

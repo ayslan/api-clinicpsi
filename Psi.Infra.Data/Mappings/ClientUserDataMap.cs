@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Psi.Infra.Data.Mapping
+namespace Psi.Infra.Data.Mappings
 {
     public class ClientUserDataMap : IEntityTypeConfiguration<ClientUserData>
     {

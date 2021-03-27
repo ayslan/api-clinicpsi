@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Psi.Domain.Interfaces
+namespace Psi.Domain.Interfaces.Repository
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Psi.Infra.Data.Mapping
+namespace Psi.Infra.Data.Mappings
 {
     public class ApplicationUserMap : IEntityTypeConfiguration<ApplicationUser>
     {

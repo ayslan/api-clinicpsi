@@ -1,5 +1,4 @@
-﻿using Psi.Domain.Entities;
-using Psi.Domain.Interfaces;
+﻿using Psi.Domain.Interfaces.Repository;
 using Psi.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Psi.Infra.Data.Repository
+namespace Psi.Infra.Data.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
