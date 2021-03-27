@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Psi.Domain.Entities;
+using Psi.Domain.Models.Client;
 using Psi.Domain.Models.User;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Psi.Domain.AutoMapper
         public DomainToModelProfile()
         {
             CreateMap<ApplicationUser, ApplicationUserModel>();
+            CreateMap<ApplicationUser, RegisterClientModel>();
+            CreateMap<ClientUserData, RegisterClientModel>();
         }
     }
 }
