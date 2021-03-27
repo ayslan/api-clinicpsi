@@ -37,7 +37,7 @@ namespace Psi.API
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddDbContext<AppDBContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -49,7 +49,7 @@ namespace Psi.API
                 options.Password.RequireDigit = false;
                 options.SignIn.RequireConfirmedEmail = true;
             })
-          .AddEntityFrameworkStores<AppDBContext>()
+          .AddEntityFrameworkStores<ApplicationDbContext>()
           .AddDefaultTokenProviders();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -145,7 +145,7 @@ namespace Psi.API
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<AppDBContext>();
+                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
                 // auto migration
                 context.Database.Migrate();

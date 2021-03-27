@@ -27,5 +27,7 @@ namespace Psi.Domain.Entities
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
+
+        public virtual ClientUserData ClientUserData { get; set; }
     }
 }

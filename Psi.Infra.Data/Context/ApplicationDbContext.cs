@@ -8,21 +8,22 @@ using System.Text;
 
 namespace Psi.Infra.Data.Context
 {
-    public class AppDBContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDBContext(DbContextOptions<AppDBContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
 
         }
 
-        DbSet<Teste> Teste { get; set; }
+        DbSet<ClientUserData> ClientUsersData { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>(new ApplicationUserMap().Configure);
+            builder.Entity<ClientUserData>(new ClientUserDataMap().Configure);
         }
     }
 }

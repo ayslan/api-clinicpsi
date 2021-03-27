@@ -9,6 +9,7 @@ namespace Psi.Domain.Entities
 {
     public class ClientUserData
     {
+        public int ClientUserDataId { get; set; }
         public string Code { get; set; }
         public string RG { get; set; }
         public DateTime? BirthDate { get; set; }
@@ -19,11 +20,14 @@ namespace Psi.Domain.Entities
         public string Profession { get; set; }
         public string Religion { get; set; }
         public string WithWhoResides { get; set; }
-        public decimal ValueService { get; set; }
+        public double ValueService { get; set; }
 
         //TODO Dados de familiares
         //TODO convenio - health insurance
 
+        //Fk
         public string UserFk { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 }

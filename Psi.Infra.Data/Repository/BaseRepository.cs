@@ -1,4 +1,5 @@
 ﻿using Psi.Domain.Entities;
+using Psi.Domain.Interfaces;
 using Psi.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -8,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace Psi.Infra.Data.Repository
 {
-    public class BaseRepository<TEntity, TKeyType> where TEntity : BaseEntity<TKeyType, TEntity>
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        protected readonly AppDBContext _db;
+        protected readonly ApplicationDbContext _db;
 
-        public BaseRepository(AppDBContext dbContext)
+        public BaseRepository(ApplicationDbContext dbContext)
         {
-            _db = dbContext;
+            if (dbContext != null)
+                _db = dbContext;
         }
 
-        protected virtual void Insert(TEntity obj)
+        public void Insert(TEntity obj)
         {
             _db.Set<TEntity>().Add(obj);
             _db.SaveChanges();
         }
 
-        protected virtual void Update(TEntity obj)
+        public void Update(TEntity obj)
         {
             _db.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
@@ -35,7 +37,7 @@ namespace Psi.Infra.Data.Repository
             await _db.SaveChangesAsync();
         }
 
-        protected virtual void Delete(int id)
+        public void Delete(int id)
         {
             _db.Set<TEntity>().Remove(Select(id));
             _db.SaveChanges();
@@ -47,13 +49,16 @@ namespace Psi.Infra.Data.Repository
             await _db.SaveChangesAsync();
         }
 
-        public async Task<TEntity> SelectAsync(int id) =>
-            await _db.Set<TEntity>().FindAsync(id);
+        public IList<TEntity> Select() =>
+            _db.Set<TEntity>().ToList();
 
-        protected virtual TEntity Select(int id) =>
+        public TEntity Select(int id) =>
             _db.Set<TEntity>().Find(id);
 
+        public async Task<TEntity> SelectAsync(int id) =>
+           await _db.Set<TEntity>().FindAsync(id);
+
         public List<TEntity> ToList() =>
-           _db.Set<TEntity>().ToList();
+            _db.Set<TEntity>().ToList();
     }
 }
