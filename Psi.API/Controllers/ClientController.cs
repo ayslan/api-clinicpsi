@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Psi.API.Base;
 using Psi.Domain.Entities;
+using Psi.Domain.Enums;
 using Psi.Domain.Models.Client;
 using Psi.Infra.CrossCutting.Extensions;
 using System;
@@ -29,7 +30,7 @@ namespace Psi.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterClientModel model)
+        public async Task<IActionResult> Register(ClientModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -38,9 +39,9 @@ namespace Psi.API.Controllers
 
             var user = _mapper.Map<ApplicationUser>(model);
             user.UserName = model.Phone.OnlyDigits();
+            user.Type = UserTypeEnum.Client;
+            user.CreationDateUtc = DateTime.UtcNow; 
             user.LockoutEnabled = false;
-
-            var clientData = _mapper.Map<ClientUserData>(model);
 
             try
             {
@@ -48,6 +49,11 @@ namespace Psi.API.Controllers
 
                 if (result.Succeeded)
                 {
+                    var clientData = _mapper.Map<ClientUserData>(model);
+                    clientData.UserFk = user.Id;
+
+
+
                     return OkResponse(user);
                 }
 

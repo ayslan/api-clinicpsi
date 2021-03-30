@@ -16,6 +16,7 @@ namespace Psi.Domain.Interfaces.Repository
         IList<TEntity> Select();
         TEntity Select(int id);
         Task<TEntity> SelectAsync(int id);
+        Task<TEntity> SelectAsync(string id);
         List<TEntity> ToList();
     }
 }

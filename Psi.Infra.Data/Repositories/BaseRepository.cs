@@ -57,6 +57,9 @@ namespace Psi.Infra.Data.Repositories
         public async Task<TEntity> SelectAsync(int id) =>
            await _db.Set<TEntity>().FindAsync(id);
 
+        public async Task<TEntity> SelectAsync(string id) =>
+         await _db.Set<TEntity>().FindAsync(id);
+
         public List<TEntity> ToList() =>
             _db.Set<TEntity>().ToList();
     }

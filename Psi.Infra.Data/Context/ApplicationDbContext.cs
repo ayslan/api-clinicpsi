@@ -16,7 +16,7 @@ namespace Psi.Infra.Data.Context
 
         }
 
-        DbSet<ClientUserData> ClientUsersData { get; set; }
+        public virtual DbSet<ClientUserData> ClientUsersData { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

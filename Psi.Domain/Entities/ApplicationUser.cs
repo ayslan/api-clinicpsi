@@ -16,7 +16,7 @@ namespace Psi.Domain.Entities
         public GenderEnum Gender { get; set; }
         public UserTypeEnum? Type { get; set; }
         public string Observation { get; set; }
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDateUtc { get; set; }
 
         //Address
         public string Zip { get; set; }
