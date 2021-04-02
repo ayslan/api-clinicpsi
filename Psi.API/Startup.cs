@@ -12,8 +12,12 @@ using Microsoft.OpenApi.Models;
 using Psi.API.Data;
 using Psi.Domain.AutoMapper;
 using Psi.Domain.Entities;
+using Psi.Domain.Interfaces.Repositories;
+using Psi.Domain.Interfaces.Services;
 using Psi.Domain.Models.Validators;
 using Psi.Infra.Data.Context;
+using Psi.Infra.Data.Repositories;
+using Psi.Service.Services;
 using System.Collections.Generic;
 
 namespace Psi.API
@@ -84,6 +88,11 @@ namespace Psi.API
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddScoped<IGlobalUnitOfWork, GlobalUnitOfWork>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+
+            services.AddScoped<IClientService, ClientService>();
 
             //Add Swagger
             services.AddSwaggerGen(c =>

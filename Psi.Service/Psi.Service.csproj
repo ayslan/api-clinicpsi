@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Psi.Domain\Psi.Domain.csproj" />
     <ProjectReference Include="..\Psi.Infra.CrossCutting\Psi.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\Psi.Infra.Data\Psi.Infra.Data.csproj" />

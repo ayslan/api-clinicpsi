@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Psi.API.Base;
 using Psi.Domain.Entities;
 using Psi.Domain.Enums;
+using Psi.Domain.Interfaces.Services;
 using Psi.Domain.Models.Client;
 using Psi.Infra.CrossCutting.Extensions;
 using System;
@@ -21,12 +22,18 @@ namespace Psi.API.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly IClientService _clientService;
 
-        public ClientController(UserManager<ApplicationUser> userManager, IMapper mapper)
+        public ClientController(UserManager<ApplicationUser> userManager, IMapper mapper, IClientService clientService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _clientService = clientService;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> List() => Response(await _clientService.ListAsync());
 
         [HttpPost]
         [AllowAnonymous]
@@ -40,7 +47,7 @@ namespace Psi.API.Controllers
             var user = _mapper.Map<ApplicationUser>(model);
             user.UserName = model.Phone.OnlyDigits();
             user.Type = UserTypeEnum.Client;
-            user.CreationDateUtc = DateTime.UtcNow; 
+            user.CreationDateUtc = DateTime.UtcNow;
             user.LockoutEnabled = false;
 
             try
@@ -63,8 +70,6 @@ namespace Psi.API.Controllers
             {
                 return Response();
             }
-
-            return View();
         }
     }
 }

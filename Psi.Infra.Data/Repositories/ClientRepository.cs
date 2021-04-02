@@ -14,48 +14,21 @@ namespace Psi.Infra.Data.Repositories
 {
     public class ClientRepository : BaseRepository<ClientUserData>, IClientRepository
     {
-        private readonly IMapper _mapper;
-
-        public ClientRepository(ApplicationDbContext contexto, IMapper mapper) : base(contexto)
+        public ClientRepository(ApplicationDbContext contexto) : base(contexto)
         {
-            _mapper = mapper;
+
         }
 
-        public async Task<List<ClientModel>> List()
+        public async Task<List<ApplicationUser>> ListAsync()
         {
             var users = await _db.Users.Include(x => x.ClientUserData).AsNoTracking().ToListAsync();
-            var clientsModel = new List<ClientModel>();
 
-            users.ForEach(user => clientsModel.Add(ConvertUserToClientModel(user)));
-
-            return clientsModel;
+            return users;
         }
 
-        public async Task<ClientModel> GetByUserId(string id)
+        public async Task<ApplicationUser> GetByUserIdAsync(string id)
         {
-            var user = await _db.Users.Include(x => x.ClientUserData).AsNoTracking().FirstAsync(x => x.Id == id);
-            var clientModel = ConvertUserToClientModel(user);
-
-            return clientModel;
-        }
-
-        //Utils
-        private ClientModel ConvertUserToClientModel(ApplicationUser user)
-        {
-            var clientModel = _mapper.Map<ClientModel>(user);
-            clientModel.Code = user.ClientUserData.Code;
-            clientModel.RG = user.ClientUserData.RG;
-            clientModel.BirthDate = user.ClientUserData.BirthDate;
-            clientModel.MaritalStatus = user.ClientUserData.MaritalStatus;
-            clientModel.Status = user.ClientUserData.Status;
-            clientModel.ServiceModality = user.ClientUserData.ServiceModality;
-            clientModel.EducationLevel = user.ClientUserData.EducationLevel;
-            clientModel.Profession = user.ClientUserData.Profession;
-            clientModel.Religion = user.ClientUserData.Religion;
-            clientModel.WithWhoResides = user.ClientUserData.WithWhoResides;
-            clientModel.ValueService = user.ClientUserData.ValueService;
-
-            return clientModel;
+            return await _db.Users.Include(x => x.ClientUserData).AsNoTracking().FirstAsync(x => x.Id == id);
         }
     }
 }
