@@ -43,17 +43,21 @@ namespace Psi.Service.Services
         private ClientModel ConvertUserToClientModel(ApplicationUser user)
         {
             var clientModel = _mapper.Map<ClientModel>(user);
-            clientModel.Code = user.ClientUserData.Code;
-            clientModel.RG = user.ClientUserData.RG;
-            clientModel.BirthDate = user.ClientUserData.BirthDate;
-            clientModel.MaritalStatus = user.ClientUserData.MaritalStatus;
-            clientModel.Status = user.ClientUserData.Status;
-            clientModel.ServiceModality = user.ClientUserData.ServiceModality;
-            clientModel.EducationLevel = user.ClientUserData.EducationLevel;
-            clientModel.Profession = user.ClientUserData.Profession;
-            clientModel.Religion = user.ClientUserData.Religion;
-            clientModel.WithWhoResides = user.ClientUserData.WithWhoResides;
-            clientModel.ValueService = user.ClientUserData.ValueService;
+
+            if (user.ClientUserData != null)
+            {
+                clientModel.Code = user.ClientUserData.Code;
+                clientModel.RG = user.ClientUserData.RG;
+                clientModel.BirthDate = user.ClientUserData.BirthDate;
+                clientModel.MaritalStatus = user.ClientUserData.MaritalStatus;
+                clientModel.Status = user.ClientUserData.Status;
+                clientModel.ServiceModality = user.ClientUserData.ServiceModality;
+                clientModel.EducationLevel = user.ClientUserData.EducationLevel;
+                clientModel.Profession = user.ClientUserData.Profession;
+                clientModel.Religion = user.ClientUserData.Religion;
+                clientModel.WithWhoResides = user.ClientUserData.WithWhoResides;
+                clientModel.ValueService = user.ClientUserData.ValueService;
+            }
 
             return clientModel;
         }

@@ -10,9 +10,28 @@ namespace Psi.Infra.Data.Context
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        private static string ConnectionString { get; set; }
+
+        public ApplicationDbContext() : base(GetOptions())
         {
 
+        }
+
+        private static DbContextOptions GetOptions()
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
+        }
+
+        public static void SetConnectionString(string connectionString)
+        {
+            if (ConnectionString == null)
+            {
+                ConnectionString = connectionString;
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
         public virtual DbSet<ClientUserData> ClientUsersData { get; set; }
