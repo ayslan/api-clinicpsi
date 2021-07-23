@@ -17,7 +17,7 @@ namespace Psi.Domain.Entities
         public ClientStatusEnum Status { get; set; }
         public ServiceModalityEnum ServiceModality { get; set; }
         public EducationLevelEnum EducationLevel { get; set; }
-        public string Profession { get; set; }
+        public string Occupation { get; set; }
         public string Religion { get; set; }
         public string WithWhoResides { get; set; }
         public double ValueService { get; set; }
