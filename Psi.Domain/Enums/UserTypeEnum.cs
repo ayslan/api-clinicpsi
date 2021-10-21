@@ -3,7 +3,6 @@
     public enum UserTypeEnum
     {
         Professional = 1,
-        Secretary = 2,
-        Client = 3
+        Secretary = 2
     }
 }

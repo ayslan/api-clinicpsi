@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Psi.Domain.Interfaces.Repositories
 {
-    public interface IClientRepository : IBaseRepository<ClientUserData>
+    public interface IClientRepository : IBaseRepository<Client>
     {
         Task<List<ApplicationUser>> ListAsync();
         Task<ApplicationUser> GetByUserIdAsync(string id);

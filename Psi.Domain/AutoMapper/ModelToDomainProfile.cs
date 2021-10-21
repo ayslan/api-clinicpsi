@@ -16,7 +16,7 @@ namespace Psi.Domain.AutoMapper
         {
             CreateMap<ApplicationUserModel, ApplicationUser>();
             CreateMap<ClientModel, ApplicationUser>();
-            CreateMap<ClientModel, ClientUserData>();
+            CreateMap<ClientModel, Client>();
 
         }
     }

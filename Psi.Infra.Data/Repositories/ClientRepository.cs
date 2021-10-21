@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Psi.Infra.Data.Repositories
 {
-    public class ClientRepository : BaseRepository<ClientUserData>, IClientRepository
+    public class ClientRepository : BaseRepository<Client>, IClientRepository
     {
         public ClientRepository(ApplicationDbContext contexto) : base(contexto)
         {

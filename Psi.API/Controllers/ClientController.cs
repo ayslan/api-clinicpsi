@@ -56,7 +56,7 @@ namespace Psi.API.Controllers
 
                 if (result.Succeeded)
                 {
-                    var clientData = _mapper.Map<ClientUserData>(model);
+                    var clientData = _mapper.Map<Client>(model);
                     clientData.UserFk = user.Id;
 
 

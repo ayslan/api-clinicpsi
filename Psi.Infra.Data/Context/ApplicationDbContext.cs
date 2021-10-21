@@ -34,14 +34,14 @@ namespace Psi.Infra.Data.Context
             }
         }
 
-        public virtual DbSet<ClientUserData> ClientUsersData { get; set; }
+        public virtual DbSet<Client> ClientUsersData { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>(new ApplicationUserMap().Configure);
-            builder.Entity<ClientUserData>(new ClientUserDataMap().Configure);
+            builder.Entity<Client>(new ClientMap().Configure);
         }
     }
 }
