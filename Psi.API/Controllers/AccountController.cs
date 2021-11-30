@@ -18,9 +18,6 @@ using System.Threading.Tasks;
 
 namespace Psi.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    [Authorize]
     public class AccountController : BaseController
     {
         private readonly AppConfiguration _appConfiguration;
@@ -34,7 +31,7 @@ namespace Psi.API.Controllers
             _appConfiguration = appConfiguration.Value;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterUserModel model)
         {
@@ -49,6 +46,7 @@ namespace Psi.API.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 LockoutEnabled = false,
+                CreationDateUtc = DateTime.UtcNow
             };
 
             try
@@ -62,13 +60,13 @@ namespace Psi.API.Controllers
 
                 return Response(result.Errors.ToDictionary(x => x.Code, x => x.Description));
             }
-            catch
+            catch(Exception ex)
             {
                 return Response();
             }
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {

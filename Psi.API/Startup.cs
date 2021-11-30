@@ -83,6 +83,8 @@ namespace Psi.API
             services.AddLocalApiAuthentication();
             services.AddControllers().AddNewtonsoftJson();
 
+            services.AddRouting(options => options.LowercaseUrls = true);
+
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new DomainToModelProfile());

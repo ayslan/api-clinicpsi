@@ -24,7 +24,7 @@ namespace Psi.Domain.Models.User
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (ConfirmPassword != Password)
-                yield return new ValidationResult("As senhas não são iguais");
+                yield return new ValidationResult("As senhas devem ser iguais");
         }
     }
 }

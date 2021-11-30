@@ -31,45 +31,8 @@ namespace Psi.API.Controllers
             _clientService = clientService;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> List() => Response(await _clientService.ListAsync());
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(ClientModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Response();
-            }
-
-            var user = _mapper.Map<ApplicationUser>(model);
-            user.UserName = model.Phone.OnlyDigits();
-            user.Type = UserTypeEnum.Client;
-            user.CreationDateUtc = DateTime.UtcNow;
-            user.LockoutEnabled = false;
-
-            try
-            {
-                var result = await _userManager.CreateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    var clientData = _mapper.Map<Client>(model);
-                    clientData.UserFk = user.Id;
-
-
-
-                    return OkResponse(user);
-                }
-
-                return Response(result.Errors.ToDictionary(x => x.Code, x => x.Description));
-            }
-            catch
-            {
-                return Response();
-            }
-        }
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> List() => Response(await _clientService.ListAsync());
     }
 }

@@ -21,14 +21,14 @@ namespace Psi.Infra.Data.Repositories
 
         public async Task<List<ApplicationUser>> ListAsync()
         {
-            var users = await _db.Users.Include(x => x.ClientUserData).AsNoTracking().ToListAsync();
+            var users = await _db.Users.AsNoTracking().ToListAsync();
 
             return users;
         }
 
         public async Task<ApplicationUser> GetByUserIdAsync(string id)
         {
-            return await _db.Users.Include(x => x.ClientUserData).AsNoTracking().FirstAsync(x => x.Id == id);
+            return await _db.Users.AsNoTracking().FirstAsync(x => x.Id == id);
         }
     }
 }
