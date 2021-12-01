@@ -46,7 +46,8 @@ namespace Psi.API.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 LockoutEnabled = false,
-                CreationDateUtc = DateTime.UtcNow
+                CreationDateUtc = DateTime.UtcNow,
+                EmailConfirmed = true
             };
 
             try
@@ -58,9 +59,14 @@ namespace Psi.API.Controllers
                     return OkResponse(_mapper.Map<ApplicationUserModel>(user));
                 }
 
+                if (result.Errors.Any(x => x.Code == "DuplicateUserName"))
+                {
+                    return Response(result.Errors.ToDictionary(x => x.Code, x => "Email já cadastrado!"));
+                }
+
                 return Response(result.Errors.ToDictionary(x => x.Code, x => x.Description));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Response();
             }
