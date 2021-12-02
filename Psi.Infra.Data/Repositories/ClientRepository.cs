@@ -1,34 +1,24 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Psi.Domain.Entities;
 using Psi.Domain.Interfaces.Repositories;
-using Psi.Domain.Models.Client;
 using Psi.Infra.Data.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Psi.Infra.Data.Repositories
 {
     public class ClientRepository : BaseRepository<Client>, IClientRepository
     {
-        public ClientRepository(ApplicationDbContext contexto) : base(contexto)
-        {
+        public ClientRepository(ApplicationDbContext contexto) : base(contexto) { }
 
+        public List<Client> List()
+        {
+            return _db.Clients.AsNoTracking().ToList();
         }
 
-        public async Task<List<ApplicationUser>> ListAsync()
+        public Client GetById(int id)
         {
-            var users = await _db.Users.AsNoTracking().ToListAsync();
-
-            return users;
-        }
-
-        public async Task<ApplicationUser> GetByUserIdAsync(string id)
-        {
-            return await _db.Users.AsNoTracking().FirstAsync(x => x.Id == id);
+            return _db.Clients.AsNoTracking().First(x => x.ClientId == id);
         }
     }
 }

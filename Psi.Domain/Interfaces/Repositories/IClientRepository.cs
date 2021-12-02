@@ -11,7 +11,7 @@ namespace Psi.Domain.Interfaces.Repositories
 {
     public interface IClientRepository : IBaseRepository<Client>
     {
-        Task<List<ApplicationUser>> ListAsync();
-        Task<ApplicationUser> GetByUserIdAsync(string id);
+        List<Client> List();
+        Client GetById(int id);
     }
 }

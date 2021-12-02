@@ -9,7 +9,7 @@ namespace Psi.Domain.Entities
 {
     public class Client
     {
-        public int ClienteId { get; set; }
+        public int ClientId { get; set; }
         public DateTime? CreationDateUtc { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

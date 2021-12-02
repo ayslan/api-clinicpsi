@@ -13,7 +13,7 @@ namespace Psi.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            builder.HasKey(c => c.ClienteId);
+            builder.HasKey(c => c.ClientId);
             builder.Property(x => x.Code).IsRequired();
             builder.Property(x => x.ServicePrice).HasPrecision(2);
         }

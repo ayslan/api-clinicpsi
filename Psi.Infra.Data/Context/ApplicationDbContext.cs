@@ -34,7 +34,7 @@ namespace Psi.Infra.Data.Context
             }
         }
 
-        public virtual DbSet<Client> ClientUsersData { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
