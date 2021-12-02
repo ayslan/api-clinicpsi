@@ -11,7 +11,5 @@ namespace Psi.Domain.Interfaces.Repositories
 {
     public interface IClientRepository : IBaseRepository<Client>
     {
-        List<Client> List();
-        Client GetById(int id);
     }
 }

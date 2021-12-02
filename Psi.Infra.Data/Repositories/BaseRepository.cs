@@ -38,29 +38,26 @@ namespace Psi.Infra.Data.Repositories
 
         public void Delete(int id)
         {
-            _db.Set<TEntity>().Remove(Select(id));
+            _db.Set<TEntity>().Remove(Find(id));
             _db.SaveChanges();
         }
 
         public async Task DeleteAsync(int id)
         {
-            _db.Set<TEntity>().Remove(Select(id));
+            _db.Set<TEntity>().Remove(Find(id));
             await _db.SaveChangesAsync();
         }
 
-        public IList<TEntity> Select() =>
-            _db.Set<TEntity>().ToList();
-
-        public TEntity Select(int id) =>
+        public TEntity Find(int id) =>
             _db.Set<TEntity>().Find(id);
 
-        public async Task<TEntity> SelectAsync(int id) =>
+        public async Task<TEntity> FindAsync(int id) =>
            await _db.Set<TEntity>().FindAsync(id);
 
-        public async Task<TEntity> SelectAsync(string id) =>
+        public async Task<TEntity> FindAsync(string id) =>
          await _db.Set<TEntity>().FindAsync(id);
 
-        public List<TEntity> ToList() =>
+        public IList<TEntity> List() =>
             _db.Set<TEntity>().ToList();
     }
 }

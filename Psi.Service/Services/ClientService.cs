@@ -22,44 +22,8 @@ namespace Psi.Service.Services
             _globalUoW = globalUoW;
         }
 
-        //public async Task<List<ClientModel>> ListAsync()
-        //{
-        //    var users = await _globalUoW.ClientRepository.ListAsync();
-        //    var clientsModel = new List<ClientModel>();
-        //    users.ForEach(user => clientsModel.Add(ConvertUserToClientModel(user)));
+        public List<ClientModel> List() => _mapper.Map<List<ClientModel>>(_globalUoW.ClientRepository.List());
 
-        //    return clientsModel;
-        //}
-
-        //public async Task<ClientModel> GetByUserId(string id)
-        //{
-        //    var user = await _globalUoW.ClientRepository.GetByUserIdAsync(id);
-        //    var clientModel = ConvertUserToClientModel(user);
-
-        //    return clientModel;
-        //}
-
-        //Utils
-        //private ClientModel ConvertUserToClientModel(ApplicationUser user)
-        //{
-        //    var clientModel = _mapper.Map<ClientModel>(user);
-
-        //    if (user.ClientUserData != null)
-        //    {
-        //        clientModel.Code = user.ClientUserData.Code;
-        //        clientModel.RG = user.ClientUserData.RG;
-        //        clientModel.BirthDate = user.ClientUserData.BirthDate;
-        //        clientModel.MaritalStatus = user.ClientUserData.MaritalStatus;
-        //        clientModel.Status = user.ClientUserData.Status;
-        //        clientModel.ServiceModality = user.ClientUserData.ServiceModality;
-        //        clientModel.EducationLevel = user.ClientUserData.EducationLevel;
-        //        clientModel.Profession = user.ClientUserData.Profession;
-        //        clientModel.Religion = user.ClientUserData.Religion;
-        //        clientModel.WithWhoResides = user.ClientUserData.WithWhoResides;
-        //        clientModel.ValueService = user.ClientUserData.ValueService;
-        //    }
-
-        //    return clientModel;
-        //}
+        public ClientModel GetByUserId(int id) => _mapper.Map<ClientModel>(_globalUoW.ClientRepository.Find(id));
     }
 }

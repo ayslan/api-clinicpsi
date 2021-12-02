@@ -15,24 +15,18 @@ using System.Threading.Tasks;
 
 namespace Psi.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    [Authorize]
-    public class ClientController : BaseController
+    public class ClientsController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IClientService _clientService;
 
-        public ClientController(UserManager<ApplicationUser> userManager, IMapper mapper, IClientService clientService)
+        public ClientsController(IMapper mapper, IClientService clientService)
         {
-            _userManager = userManager;
             _mapper = mapper;
             _clientService = clientService;
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> List() => Response(await _clientService.ListAsync());
+        [HttpGet]
+        public IActionResult List() => Response(_clientService);
     }
 }

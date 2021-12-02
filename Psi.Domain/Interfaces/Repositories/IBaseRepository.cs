@@ -13,10 +13,9 @@ namespace Psi.Domain.Interfaces.Repository
         Task UpdateAsync(TEntity obj);
         void Delete(int id);
         Task DeleteAsync(int id);
-        IList<TEntity> Select();
-        TEntity Select(int id);
-        Task<TEntity> SelectAsync(int id);
-        Task<TEntity> SelectAsync(string id);
-        List<TEntity> ToList();
+        TEntity Find(int id);
+        Task<TEntity> FindAsync(int id);
+        Task<TEntity> FindAsync(string id);
+        IList<TEntity> List();
     }
 }
