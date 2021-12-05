@@ -9,7 +9,8 @@ namespace Psi.Domain.Interfaces.Services
 {
     public interface IClientService
     {
-        //Task<List<ClientModel>> ListAsync();
-        //Task<ClientModel> GetByUserId(string id);
+        List<ClientModel> List();
+        ClientModel GetByUserId(int id);
+        ClientModel Register(ClientModel clientModel);
     }
 }

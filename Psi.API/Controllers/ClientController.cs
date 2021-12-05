@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Psi.API.Controllers
 {
+    [AllowAnonymous]
     public class ClientsController : BaseController
     {
         private readonly IMapper _mapper;
@@ -27,6 +28,17 @@ namespace Psi.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult List() => Response(_clientService);
+        public IActionResult List() => Response(_clientService.List());
+
+        [HttpGet("{id}")]
+        public IActionResult Get([FromRoute] int id) => Response(_clientService.GetByUserId(id));
+
+        [HttpPost]
+        public IActionResult Register(ClientModel clientModel)
+        {
+            var result = _clientService.Register(clientModel);
+
+            return Response(result);
+        }
     }
 }

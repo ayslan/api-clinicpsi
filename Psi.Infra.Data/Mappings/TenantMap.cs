@@ -4,11 +4,11 @@ using Psi.Domain.Entities;
 
 namespace Psi.Infra.Data.Mappings
 {
-    public class ApplicationUserMap : IEntityTypeConfiguration<ApplicationUser>
+    public class TenantMap : IEntityTypeConfiguration<Tenant>
     {
-        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        public void Configure(EntityTypeBuilder<Tenant> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.TenantId);
             builder.Property(x => x.Name).IsRequired();
         }
     }

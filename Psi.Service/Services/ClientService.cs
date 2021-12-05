@@ -25,5 +25,14 @@ namespace Psi.Service.Services
         public List<ClientModel> List() => _mapper.Map<List<ClientModel>>(_globalUoW.ClientRepository.List());
 
         public ClientModel GetByUserId(int id) => _mapper.Map<ClientModel>(_globalUoW.ClientRepository.Find(id));
+
+        public ClientModel Register(ClientModel clientModel)
+        {
+            var client = _mapper.Map<Client>(clientModel);
+            _globalUoW.ClientRepository.Insert(client);
+
+            clientModel.ClientId = client.ClientId;
+            return clientModel;
+        }
     }
 }

@@ -17,10 +17,7 @@ namespace Psi.Infra.Data.Context
 
         }
 
-        private static DbContextOptions GetOptions()
-        {
-            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
-        }
+        private static DbContextOptions GetOptions() => SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
 
         public static void SetConnectionString(string connectionString)
         {
@@ -35,6 +32,8 @@ namespace Psi.Infra.Data.Context
         }
 
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Tenant> Tenants { get; set; }
+        public virtual DbSet<TenantUser> TenantUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -42,6 +41,8 @@ namespace Psi.Infra.Data.Context
 
             builder.Entity<ApplicationUser>(new ApplicationUserMap().Configure);
             builder.Entity<Client>(new ClientMap().Configure);
+            builder.Entity<Tenant>(new TenantMap().Configure);
+            builder.Entity<TenantUser>(new TenantUserMap().Configure);
         }
     }
 }

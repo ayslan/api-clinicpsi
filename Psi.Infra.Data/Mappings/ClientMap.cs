@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Psi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Psi.Infra.Data.Mappings
 {
@@ -16,6 +11,10 @@ namespace Psi.Infra.Data.Mappings
             builder.HasKey(c => c.ClientId);
             builder.Property(x => x.Code).IsRequired();
             builder.Property(x => x.ServicePrice).HasPrecision(2);
+
+            builder.HasOne(d => d.Tenant)
+              .WithMany(p => p.Clients)
+              .HasForeignKey(d => d.TenantFk);
         }
     }
 }
