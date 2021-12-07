@@ -12,5 +12,10 @@ namespace Psi.Infra.Data.Repositories
     public class TenantUserRepository : BaseRepository<TenantUser>, ITenantUserRepository
     {
         public TenantUserRepository(ApplicationDbContext contexto) : base(contexto) { }
+
+        public TenantUser GetTenantUserByIds(int tenantId, string userId)
+        {
+            return _db.TenantUsers.Where(x => x.TenantFk == tenantId && x.UserFk == userId).FirstOrDefault();
+        }
     }
 }

@@ -56,5 +56,8 @@ namespace Psi.Domain.Models.Client
         //Emergency contact
         public string EmergencyContact { get; set; }
         public string EmergencyPhone { get; set; }
+
+        //fk
+        public int TenantFk { get; set; }
     }
 }

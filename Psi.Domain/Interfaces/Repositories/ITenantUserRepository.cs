@@ -10,5 +10,6 @@ namespace Psi.Domain.Interfaces.Repositories
 {
     public interface ITenantUserRepository : IBaseRepository<TenantUser>
     {
+        TenantUser GetTenantUserByIds(int tenantId, string userId);
     }
 }

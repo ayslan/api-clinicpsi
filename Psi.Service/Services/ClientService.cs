@@ -31,8 +31,7 @@ namespace Psi.Service.Services
             var client = _mapper.Map<Client>(clientModel);
             _globalUoW.ClientRepository.Insert(client);
 
-            clientModel.ClientId = client.ClientId;
-            return clientModel;
+            return _mapper.Map<ClientModel>(client); ;
         }
     }
 }

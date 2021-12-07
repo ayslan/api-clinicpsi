@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psi.API", "Psi.API\Psi.API.csproj", "{24D76CAD-E892-4E40-B50B-D586FC72D0E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psi.API", "Psi.API\Psi.API.csproj", "{24D76CAD-E892-4E40-B50B-D586FC72D0E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psi.Domain", "Psi.Domain\Psi.Domain.csproj", "{480676CE-A5A8-4116-9102-8A82A4884C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psi.Domain", "Psi.Domain\Psi.Domain.csproj", "{480676CE-A5A8-4116-9102-8A82A4884C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psi.Service", "Psi.Service\Psi.Service.csproj", "{531CA343-C362-4490-8871-0CFAF2D15E6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psi.Service", "Psi.Service\Psi.Service.csproj", "{531CA343-C362-4490-8871-0CFAF2D15E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psi.Infra.Data", "Psi.Infra.Data\Psi.Infra.Data.csproj", "{3DD9343B-131E-4012-A614-EA1B3F553F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psi.Infra.Data", "Psi.Infra.Data\Psi.Infra.Data.csproj", "{3DD9343B-131E-4012-A614-EA1B3F553F4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psi.Infra.CrossCutting", "Psi.Infra.CrossCutting\Psi.Infra.CrossCutting.csproj", "{79530389-C822-47D3-8BE9-CC67AF54FAE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psi.Infra.CrossCutting", "Psi.Infra.CrossCutting\Psi.Infra.CrossCutting.csproj", "{79530389-C822-47D3-8BE9-CC67AF54FAE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{8F7C4E8E-7921-4F6E-A78A-7F73FDDBD6F6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{D33EDB37-9FD6-487F-849F-179182332487}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{D33EDB37-9FD6-487F-849F-179182332487}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service", "{E8BB0387-1A2F-4AE4-8DA0-5B667B78C0B3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Service", "2 - Service", "{E8BB0387-1A2F-4AE4-8DA0-5B667B78C0B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{F6A31EAC-F389-45D5-B28B-EBA6624AADB6}"
 EndProject
