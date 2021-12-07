@@ -9,5 +9,7 @@ namespace Psi.Domain.Interfaces.Repositories
     public interface IGlobalUnitOfWork
     {
         IClientRepository ClientRepository { get; set; }
+        ITenantRepository TenantRepository { get; set; }
+        ITenantUserRepository TenantUserRepository { get; set; }
     }
 }

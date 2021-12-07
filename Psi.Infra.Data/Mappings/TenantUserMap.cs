@@ -16,7 +16,8 @@ namespace Psi.Infra.Data.Mappings
 
             builder.HasOne(d => d.User)
                .WithMany(p => p.TenantUsers)
-               .HasForeignKey(d => d.UserFk);
+               .HasForeignKey(d => d.UserFk)
+               .IsRequired();
         }
     }
 }

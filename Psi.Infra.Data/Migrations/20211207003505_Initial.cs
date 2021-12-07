@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Psi.Infra.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,49 +49,16 @@ namespace Psi.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "Tenants",
                 columns: table => new
                 {
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    TenantId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreationDateUtc = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneAux = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RG = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MaritalStatus = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    ServiceModality = table.Column<int>(type: "int", nullable: false),
-                    EducationLevel = table.Column<int>(type: "int", nullable: false),
-                    AgeGroup = table.Column<int>(type: "int", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Religion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Profession = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Zip = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number = table.Column<int>(type: "int", nullable: true),
-                    Complement = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InsuranceFk = table.Column<int>(type: "int", nullable: false),
-                    ServicePrice = table.Column<double>(type: "float(2)", precision: 2, nullable: false),
-                    InsuranceTransferType = table.Column<int>(type: "int", nullable: false),
-                    InsuranceTransferValue = table.Column<double>(type: "float", nullable: false),
-                    EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmergencyPhone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.ClientId);
+                    table.PrimaryKey("PK_Tenants", x => x.TenantId);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +167,85 @@ namespace Psi.Infra.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreationDateUtc = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneAux = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RG = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MaritalStatus = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ServiceModality = table.Column<int>(type: "int", nullable: false),
+                    EducationLevel = table.Column<int>(type: "int", nullable: false),
+                    AgeGroup = table.Column<int>(type: "int", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Religion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Profession = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Zip = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<int>(type: "int", nullable: true),
+                    Complement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InsuranceFk = table.Column<int>(type: "int", nullable: false),
+                    ServicePrice = table.Column<double>(type: "float(2)", precision: 2, nullable: false),
+                    InsuranceTransferType = table.Column<int>(type: "int", nullable: false),
+                    InsuranceTransferValue = table.Column<double>(type: "float", nullable: false),
+                    EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmergencyPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TenantFk = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientId);
+                    table.ForeignKey(
+                        name: "FK_Clients_Tenants_TenantFk",
+                        column: x => x.TenantFk,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TenantUsers",
+                columns: table => new
+                {
+                    TenantUserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserFk = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TenantFk = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenantUsers", x => x.TenantUserId);
+                    table.ForeignKey(
+                        name: "FK_TenantUsers_AspNetUsers_UserFk",
+                        column: x => x.UserFk,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TenantUsers_Tenants_TenantFk",
+                        column: x => x.TenantFk,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -238,6 +284,21 @@ namespace Psi.Infra.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_TenantFk",
+                table: "Clients",
+                column: "TenantFk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TenantUsers_TenantFk",
+                table: "TenantUsers",
+                column: "TenantFk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TenantUsers_UserFk",
+                table: "TenantUsers",
+                column: "UserFk");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -261,10 +322,16 @@ namespace Psi.Infra.Data.Migrations
                 name: "Clients");
 
             migrationBuilder.DropTable(
+                name: "TenantUsers");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Tenants");
         }
     }
 }

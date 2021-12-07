@@ -10,8 +10,8 @@ using Psi.Infra.Data.Context;
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211202030641_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20211207003505_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,12 +332,55 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TenantFk")
+                        .HasColumnType("int");
+
                     b.Property<string>("Zip")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClientId");
 
+                    b.HasIndex("TenantFk");
+
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("TenantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TenantId");
+
+                    b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.TenantUser", b =>
+                {
+                    b.Property<int>("TenantUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("TenantFk")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserFk")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("TenantUserId");
+
+                    b.HasIndex("TenantFk");
+
+                    b.HasIndex("UserFk");
+
+                    b.ToTable("TenantUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -389,6 +432,46 @@ namespace Psi.Infra.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Client", b =>
+                {
+                    b.HasOne("Psi.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("Clients")
+                        .HasForeignKey("TenantFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.TenantUser", b =>
+                {
+                    b.HasOne("Psi.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("TenantUsers")
+                        .HasForeignKey("TenantFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psi.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("TenantUsers")
+                        .HasForeignKey("UserFk");
+
+                    b.Navigation("Tenant");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("TenantUsers");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Tenant", b =>
+                {
+                    b.Navigation("Clients");
+
+                    b.Navigation("TenantUsers");
                 });
 #pragma warning restore 612, 618
         }

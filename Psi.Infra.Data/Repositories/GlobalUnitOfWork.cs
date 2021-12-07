@@ -12,6 +12,8 @@ namespace Psi.Infra.Data.Repositories
     {
         private ApplicationDbContext _db;
         public virtual IClientRepository ClientRepository { get; set; }
+        public virtual ITenantRepository TenantRepository { get; set; }
+        public virtual ITenantUserRepository TenantUserRepository { get; set; }
 
         public GlobalUnitOfWork()
         {
