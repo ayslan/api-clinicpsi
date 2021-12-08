@@ -45,8 +45,11 @@ namespace Psi.Service.Services
 
             if (tenantUser == null)
             {
-                tenantUser.TenantFk = tenantId;
-                tenantUser.UserFk = userId;
+                tenantUser = new TenantUser
+                {
+                    TenantFk = tenantId,
+                    UserFk = userId
+                };
 
                 _globalUoW.TenantUserRepository.Insert(tenantUser);
             }

@@ -24,6 +24,8 @@ namespace Psi.Infra.Data.Repositories
         private void loadAllRepositories(ApplicationDbContext db)
         {
             ClientRepository = new ClientRepository(db);
+            TenantRepository = new TenantRepository(db);
+            TenantUserRepository = new TenantUserRepository(db);
         }
 
         public GlobalUnitOfWork InNewContext()
