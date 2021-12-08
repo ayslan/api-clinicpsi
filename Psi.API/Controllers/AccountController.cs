@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Psi.API.Base;
 using Psi.API.Data;
 using Psi.Domain.Entities;
+using Psi.Domain.Interfaces.Services;
 using Psi.Domain.Models.User;
 using Psi.Infra.CrossCutting;
 using RestSharp;
@@ -24,11 +25,15 @@ namespace Psi.API.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IMapper mapper, IOptions<AppConfiguration> appConfiguration)
+        private readonly ITenantService _tenantService;
+
+        public AccountController(UserManager<ApplicationUser> userManager, IMapper mapper, IOptions<AppConfiguration> appConfiguration,
+            ITenantService tenantService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _appConfiguration = appConfiguration.Value;
+            _tenantService = tenantService;
         }
 
         [HttpPost("register")]
@@ -56,7 +61,8 @@ namespace Psi.API.Controllers
 
                 if (result.Succeeded)
                 {
-                    return OkResponse(_mapper.Map<ApplicationUserModel>(user));
+                    _tenantService.Create(user.Id);
+                    return OkResponse();
                 }
 
                 if (result.Errors.Any(x => x.Code == "DuplicateUserName"))

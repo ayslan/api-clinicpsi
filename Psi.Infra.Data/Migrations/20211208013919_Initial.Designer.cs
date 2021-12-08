@@ -10,7 +10,7 @@ using Psi.Infra.Data.Context;
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211207003505_Initial")]
+    [Migration("20211208013919_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -372,6 +372,7 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserFk")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TenantUserId");
@@ -455,7 +456,9 @@ namespace Psi.Infra.Data.Migrations
 
                     b.HasOne("Psi.Domain.Entities.ApplicationUser", "User")
                         .WithMany("TenantUsers")
-                        .HasForeignKey("UserFk");
+                        .HasForeignKey("UserFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tenant");
 

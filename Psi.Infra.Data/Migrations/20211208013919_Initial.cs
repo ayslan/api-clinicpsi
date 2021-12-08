@@ -226,7 +226,7 @@ namespace Psi.Infra.Data.Migrations
                 {
                     TenantUserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserFk = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserFk = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TenantFk = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -237,7 +237,7 @@ namespace Psi.Infra.Data.Migrations
                         column: x => x.UserFk,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TenantUsers_Tenants_TenantFk",
                         column: x => x.TenantFk,

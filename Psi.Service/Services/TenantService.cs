@@ -16,6 +16,8 @@ namespace Psi.Service.Services
         private readonly IMapper _mapper;
         private readonly IGlobalUnitOfWork _globalUoW;
 
+        private const string TENANT_NAME_DEFAULT = "Minha Clínica";
+
         public TenantService(IMapper mapper, IGlobalUnitOfWork globalUoW)
         {
             _mapper = mapper;
@@ -23,10 +25,16 @@ namespace Psi.Service.Services
         }
 
 
-        public TenantModel Create(TenantModel tenantModel)
+        public TenantModel Create(string userId, string name = null)
         {
-            var tenant = _mapper.Map<Tenant>(tenantModel);
+            var tenant = new Tenant
+            {
+                Name = name ?? TENANT_NAME_DEFAULT
+            };
+
             _globalUoW.TenantRepository.Insert(tenant);
+
+            AddUserToTenant(tenant.TenantId, userId);
 
             return _mapper.Map<TenantModel>(tenant);
         }

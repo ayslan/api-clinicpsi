@@ -5,7 +5,7 @@ namespace Psi.Domain.Interfaces.Services
 {
     public interface ITenantService
     {
-        TenantModel Create(TenantModel tenantModel);
+        TenantModel Create(string userId, string name = null);
         TenantUser AddUserToTenant(int tenantId, string userId);
     }
 }
