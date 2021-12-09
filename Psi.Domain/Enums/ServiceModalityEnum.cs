@@ -2,7 +2,7 @@
 {
     public enum ServiceModalityEnum
     {
-        Personal,
-        Online
+        Personal = 1,
+        Online = 2
     }
 }
