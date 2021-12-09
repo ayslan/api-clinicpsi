@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Psi.API.Data;
+using Psi.API.Services;
 using Psi.Domain.AutoMapper;
 using Psi.Domain.Entities;
 using Psi.Domain.Interfaces.Repositories;
@@ -78,7 +79,8 @@ namespace Psi.API
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryClients(Config.Clients)
                 .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddAspNetIdentity<ApplicationUser>();
+                .AddAspNetIdentity<ApplicationUser>()
+                .AddProfileService<ProfileService>();
 
             services.AddLocalApiAuthentication();
             services.AddControllers().AddNewtonsoftJson();

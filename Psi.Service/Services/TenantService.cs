@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Psi.Domain.Entities;
 using Psi.Domain.Interfaces.Repositories;
 using Psi.Domain.Interfaces.Services;
@@ -15,17 +16,19 @@ namespace Psi.Service.Services
     {
         private readonly IMapper _mapper;
         private readonly IGlobalUnitOfWork _globalUoW;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         private const string TENANT_NAME_DEFAULT = "Minha Clínica";
 
-        public TenantService(IMapper mapper, IGlobalUnitOfWork globalUoW)
+        public TenantService(IMapper mapper, IGlobalUnitOfWork globalUoW, UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
             _globalUoW = globalUoW;
+            _userManager = userManager;
         }
 
 
-        public TenantModel Create(string userId, string name = null)
+        public async Task<TenantModel> Create(string userId, string name = null)
         {
             var tenant = new Tenant
             {
@@ -34,12 +37,12 @@ namespace Psi.Service.Services
 
             _globalUoW.TenantRepository.Insert(tenant);
 
-            AddUserToTenant(tenant.TenantId, userId);
+            await AddUserToTenant(tenant.TenantId, userId);
 
             return _mapper.Map<TenantModel>(tenant);
         }
 
-        public TenantUser AddUserToTenant(int tenantId, string userId)
+        public async Task<TenantUser> AddUserToTenant(int tenantId, string userId)
         {
             var tenantUser = _globalUoW.TenantUserRepository.GetTenantUserByIds(tenantId, userId);
 
@@ -52,6 +55,10 @@ namespace Psi.Service.Services
                 };
 
                 _globalUoW.TenantUserRepository.Insert(tenantUser);
+
+                var user = await _userManager.FindByIdAsync(userId);
+                user.CurrentTenantFk = tenantId;
+                await _userManager.UpdateAsync(user);
             }
 
             return null;

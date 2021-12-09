@@ -10,6 +10,7 @@ namespace Psi.Domain.Entities
     {
         public string Name { get; set; }
         public DateTime? CreationDateUtc { get; set; }
+        public int CurrentTenantFk { get; set; }
 
         //virtual
         public virtual List<TenantUser> TenantUsers { get; set; }

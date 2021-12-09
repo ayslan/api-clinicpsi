@@ -61,7 +61,7 @@ namespace Psi.API.Controllers
 
                 if (result.Succeeded)
                 {
-                    _tenantService.Create(user.Id);
+                    await _tenantService.Create(user.Id);
                     return OkResponse();
                 }
 

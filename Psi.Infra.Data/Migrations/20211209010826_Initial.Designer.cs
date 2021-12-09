@@ -10,7 +10,7 @@ using Psi.Infra.Data.Context;
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208013919_Initial")]
+    [Migration("20211209010826_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,9 @@ namespace Psi.Infra.Data.Migrations
 
                     b.Property<DateTime?>("CreationDateUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CurrentTenantFk")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)

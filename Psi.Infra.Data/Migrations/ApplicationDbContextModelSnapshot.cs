@@ -165,6 +165,9 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<DateTime?>("CreationDateUtc")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CurrentTenantFk")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
