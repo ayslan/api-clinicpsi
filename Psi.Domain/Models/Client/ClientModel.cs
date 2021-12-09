@@ -26,12 +26,12 @@ namespace Psi.Domain.Models.Client
         public string RG { get; set; }
         [Required]
         public DateTime? BirthDate { get; set; }
-        public MaritalStatusEnum MaritalStatus { get; set; }
-        public ClientStatusEnum Status { get; set; }
-        public ServiceModalityEnum ServiceModality { get; set; }
-        public EducationLevelEnum EducationLevel { get; set; }
-        public AgeGroupEnum AgeGroup { get; set; }
-        public GenderEnum Gender { get; set; }
+        public MaritalStatusEnum? MaritalStatus { get; set; }
+        public ClientStatusEnum? Status { get; set; }
+        public ServiceModalityEnum? ServiceModality { get; set; }
+        public EducationLevelEnum? EducationLevel { get; set; }
+        public AgeGroupEnum? AgeGroup { get; set; }
+        public GenderEnum? Gender { get; set; }
         public string Occupation { get; set; }
         public string Religion { get; set; }
         public string Profession { get; set; }
@@ -48,9 +48,9 @@ namespace Psi.Domain.Models.Client
         public string Country { get; set; }
 
         //Payment
-        public int InsuranceFk { get; set; }
+        public int? InsuranceFk { get; set; }
         public double ServicePrice { get; set; }
-        public CalculationTypeEnum InsuranceTransferType { get; set; }
+        public CalculationTypeEnum? InsuranceTransferType { get; set; }
         public double InsuranceTransferValue { get; set; }
 
         //Emergency contact

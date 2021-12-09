@@ -22,7 +22,10 @@ namespace Psi.Service.Services
             _globalUoW = globalUoW;
         }
 
-        public List<ClientModel> List() => _mapper.Map<List<ClientModel>>(_globalUoW.ClientRepository.List());
+        public List<ClientModel> List(int tenantId)
+        {
+            return _mapper.Map<List<ClientModel>>(_globalUoW.ClientRepository.ListByTenantId(tenantId));
+        }
 
         public ClientModel GetByUserId(int id) => _mapper.Map<ClientModel>(_globalUoW.ClientRepository.Find(id));
 

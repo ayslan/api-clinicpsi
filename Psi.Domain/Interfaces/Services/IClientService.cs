@@ -9,7 +9,7 @@ namespace Psi.Domain.Interfaces.Services
 {
     public interface IClientService
     {
-        List<ClientModel> List();
+        List<ClientModel> List(int tenantId);
         ClientModel GetByUserId(int id);
         ClientModel Register(ClientModel clientModel);
     }

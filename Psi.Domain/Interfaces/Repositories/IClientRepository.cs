@@ -11,5 +11,6 @@ namespace Psi.Domain.Interfaces.Repositories
 {
     public interface IClientRepository : IBaseRepository<Client>
     {
+        List<Client> ListByTenantId(int tenantId);
     }
 }

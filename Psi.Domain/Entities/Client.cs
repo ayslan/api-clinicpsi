@@ -20,12 +20,12 @@ namespace Psi.Domain.Entities
         public string Code { get; set; }
         public string RG { get; set; }
         public DateTime? BirthDate { get; set; }
-        public MaritalStatusEnum MaritalStatus { get; set; }
-        public ClientStatusEnum Status { get; set; }
-        public ServiceModalityEnum ServiceModality { get; set; }
-        public EducationLevelEnum EducationLevel { get; set; }
-        public AgeGroupEnum AgeGroup { get; set; }
-        public GenderEnum Gender { get; set; }
+        public MaritalStatusEnum? MaritalStatus { get; set; }
+        public ClientStatusEnum? Status { get; set; }
+        public ServiceModalityEnum? ServiceModality { get; set; }
+        public EducationLevelEnum? EducationLevel { get; set; }
+        public AgeGroupEnum? AgeGroup { get; set; }
+        public GenderEnum? Gender { get; set; }
         public string Occupation { get; set; }
         public string Religion { get; set; }
         public string Profession { get; set; }
@@ -42,10 +42,10 @@ namespace Psi.Domain.Entities
         public string Country { get; set; }
 
         //Payment
-        public int InsuranceFk { get; set; }
-        public double ServicePrice { get; set; }
-        public CalculationTypeEnum InsuranceTransferType { get; set; } 
-        public double InsuranceTransferValue { get; set; }
+        public int? InsuranceFk { get; set; }
+        public double? ServicePrice { get; set; }
+        public CalculationTypeEnum? InsuranceTransferType { get; set; } 
+        public double? InsuranceTransferValue { get; set; }
 
         //Emergency contact
         public string EmergencyContact { get; set; }
@@ -53,7 +53,6 @@ namespace Psi.Domain.Entities
 
         //fk
         public int TenantFk { get; set; }
-
 
         //virtual
         public virtual Tenant Tenant { get; set; } 

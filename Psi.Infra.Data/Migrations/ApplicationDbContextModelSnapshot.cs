@@ -232,7 +232,7 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AgeGroup")
+                    b.Property<int?>("AgeGroup")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("BirthDate")
@@ -260,7 +260,7 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EducationLevel")
+                    b.Property<int?>("EducationLevel")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -272,19 +272,19 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("EmergencyPhone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("InsuranceFk")
+                    b.Property<int?>("InsuranceFk")
                         .HasColumnType("int");
 
-                    b.Property<int>("InsuranceTransferType")
+                    b.Property<int?>("InsuranceTransferType")
                         .HasColumnType("int");
 
-                    b.Property<double>("InsuranceTransferValue")
+                    b.Property<double?>("InsuranceTransferValue")
                         .HasColumnType("float");
 
-                    b.Property<int>("MaritalStatus")
+                    b.Property<int?>("MaritalStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -314,17 +314,17 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("Religion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceModality")
+                    b.Property<int?>("ServiceModality")
                         .HasColumnType("int");
 
-                    b.Property<double>("ServicePrice")
+                    b.Property<double?>("ServicePrice")
                         .HasPrecision(2)
                         .HasColumnType("float(2)");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("StreetAddress")

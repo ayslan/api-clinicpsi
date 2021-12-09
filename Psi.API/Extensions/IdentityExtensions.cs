@@ -30,9 +30,8 @@ namespace Psi.API.Extensions
 
             var claim = new ClaimsPrincipal(identity);
             var currentTenantId = claim.FindFirstValue("current_tenant_id");
-            var converter = TypeDescriptor.GetConverter(typeof(string));
 
-            return (int)converter.ConvertFromInvariantString(currentTenantId);
+            return Convert.ToInt32(currentTenantId);
         }
     }
 }
