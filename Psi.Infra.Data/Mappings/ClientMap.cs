@@ -9,8 +9,11 @@ namespace Psi.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Client> builder)
         {
             builder.HasKey(c => c.ClientId);
-            builder.Property(x => x.Code).IsRequired();
-            builder.Property(x => x.ServicePrice).HasPrecision(2);
+            builder.Property(c => c.Name).IsRequired();
+            builder.Property(c => c.BirthDate).IsRequired();
+            builder.Property(c => c.Gender).IsRequired();
+            builder.Property(c => c.Status).IsRequired();
+            builder.Property(c => c.Phone).IsRequired();
 
             builder.HasOne(d => d.Tenant)
               .WithMany(p => p.Clients)

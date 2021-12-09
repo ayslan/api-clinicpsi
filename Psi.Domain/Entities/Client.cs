@@ -14,10 +14,8 @@ namespace Psi.Domain.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string PhoneAux { get; set; }
         public string CPF { get; set; }
         public string Observation { get; set; }
-        public string Code { get; set; }
         public string RG { get; set; }
         public DateTime? BirthDate { get; set; }
         public MaritalStatusEnum? MaritalStatus { get; set; }
@@ -43,9 +41,9 @@ namespace Psi.Domain.Entities
 
         //Payment
         public int? InsuranceFk { get; set; }
-        public double? ServicePrice { get; set; }
+        public float? ServicePrice { get; set; }
         public CalculationTypeEnum? InsuranceTransferType { get; set; } 
-        public double? InsuranceTransferValue { get; set; }
+        public float? InsuranceTransferValue { get; set; }
 
         //Emergency contact
         public string EmergencyContact { get; set; }

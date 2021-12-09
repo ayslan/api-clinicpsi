@@ -6,7 +6,6 @@ namespace Psi.Domain.Models.Client
 {
     public class ClientModel
     {
-        [Required]
         public int ClientId { get; set; }
         [Required]
         public string Name { get; set; }
@@ -14,18 +13,18 @@ namespace Psi.Domain.Models.Client
         public string Email { get; set; }
         [Required]
         public string Phone { get; set; }
-        public string PhoneAux { get; set; }
         public string CPF { get; set; }
         public string Observation { get; set; }
-        public string Code { get; set; }
         public string RG { get; set; }
         [Required]
         public DateTime? BirthDate { get; set; }
         public MaritalStatusEnum? MaritalStatus { get; set; }
+        [Required]
         public ClientStatusEnum? Status { get; set; }
         public ServiceModalityEnum? ServiceModality { get; set; }
         public EducationLevelEnum? EducationLevel { get; set; }
         public AgeGroupEnum? AgeGroup { get; set; }
+        [Required]
         public GenderEnum? Gender { get; set; }
         public string Occupation { get; set; }
         public string Religion { get; set; }
@@ -44,9 +43,9 @@ namespace Psi.Domain.Models.Client
 
         //Payment
         public int? InsuranceFk { get; set; }
-        public double ServicePrice { get; set; }
+        public float? ServicePrice { get; set; }
         public CalculationTypeEnum? InsuranceTransferType { get; set; }
-        public double InsuranceTransferValue { get; set; }
+        public float? InsuranceTransferValue { get; set; }
 
         //Emergency contact
         public string EmergencyContact { get; set; }

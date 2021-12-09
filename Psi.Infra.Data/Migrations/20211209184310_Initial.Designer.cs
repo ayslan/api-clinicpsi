@@ -10,7 +10,7 @@ using Psi.Infra.Data.Context;
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211209023504_Initial")]
+    [Migration("20211209184310_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,16 +238,13 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Complement")
@@ -274,7 +271,7 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("EmergencyPhone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Gender")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<int?>("InsuranceFk")
@@ -283,13 +280,14 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<int?>("InsuranceTransferType")
                         .HasColumnType("int");
 
-                    b.Property<double?>("InsuranceTransferValue")
-                        .HasColumnType("float");
+                    b.Property<float?>("InsuranceTransferValue")
+                        .HasColumnType("real");
 
                     b.Property<int?>("MaritalStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Number")
@@ -302,9 +300,7 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneAux")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Profession")
@@ -319,14 +315,13 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<int?>("ServiceModality")
                         .HasColumnType("int");
 
-                    b.Property<double?>("ServicePrice")
-                        .HasPrecision(2)
-                        .HasColumnType("float(2)");
+                    b.Property<float?>("ServicePrice")
+                        .HasColumnType("real");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Status")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("StreetAddress")

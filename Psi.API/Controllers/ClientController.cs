@@ -9,7 +9,6 @@ using System;
 
 namespace Psi.API.Controllers
 {
-    [AllowAnonymous]
     public class ClientsController : BaseController
     {
         private readonly IMapper _mapper;
