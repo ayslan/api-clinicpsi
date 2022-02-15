@@ -54,5 +54,6 @@ namespace Psi.Domain.Entities
 
         //virtual
         public virtual Tenant Tenant { get; set; } 
+        public virtual Insurance Insurance { get; set; }
     }
 }

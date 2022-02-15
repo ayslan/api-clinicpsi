@@ -14,5 +14,6 @@ namespace Psi.Domain.Entities
         //virtual
         public virtual List<Client> Clients { get; set; }
         public virtual List<TenantUser> TenantUsers { get; set; }
+        public virtual List<Insurance> Insurance { get; set; }
     }
 }

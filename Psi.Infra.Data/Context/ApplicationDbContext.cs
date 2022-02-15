@@ -34,6 +34,7 @@ namespace Psi.Infra.Data.Context
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<TenantUser> TenantUsers { get; set; }
+        public virtual DbSet<Insurance> Insurance { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,6 +44,8 @@ namespace Psi.Infra.Data.Context
             builder.Entity<Client>(new ClientMap().Configure);
             builder.Entity<Tenant>(new TenantMap().Configure);
             builder.Entity<TenantUser>(new TenantUserMap().Configure);
+            builder.Entity<Insurance>(new InsuranceMap().Configure);
+
         }
     }
 }

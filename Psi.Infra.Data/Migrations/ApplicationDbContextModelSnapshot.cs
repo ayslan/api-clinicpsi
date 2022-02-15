@@ -336,9 +336,32 @@ namespace Psi.Infra.Data.Migrations
 
                     b.HasKey("ClientId");
 
+                    b.HasIndex("InsuranceFk");
+
                     b.HasIndex("TenantFk");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Insurance", b =>
+                {
+                    b.Property<int>("InsuranceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TenantFk")
+                        .HasColumnType("int");
+
+                    b.HasKey("InsuranceId");
+
+                    b.HasIndex("TenantFk");
+
+                    b.ToTable("Insurance");
                 });
 
             modelBuilder.Entity("Psi.Domain.Entities.Tenant", b =>
@@ -433,8 +456,25 @@ namespace Psi.Infra.Data.Migrations
 
             modelBuilder.Entity("Psi.Domain.Entities.Client", b =>
                 {
+                    b.HasOne("Psi.Domain.Entities.Insurance", "Insurance")
+                        .WithMany()
+                        .HasForeignKey("InsuranceFk");
+
                     b.HasOne("Psi.Domain.Entities.Tenant", "Tenant")
                         .WithMany("Clients")
+                        .HasForeignKey("TenantFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Insurance");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Insurance", b =>
+                {
+                    b.HasOne("Psi.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("Insurance")
                         .HasForeignKey("TenantFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -469,6 +509,8 @@ namespace Psi.Infra.Data.Migrations
             modelBuilder.Entity("Psi.Domain.Entities.Tenant", b =>
                 {
                     b.Navigation("Clients");
+
+                    b.Navigation("Insurance");
 
                     b.Navigation("TenantUsers");
                 });

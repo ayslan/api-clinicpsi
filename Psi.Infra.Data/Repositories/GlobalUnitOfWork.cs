@@ -14,6 +14,7 @@ namespace Psi.Infra.Data.Repositories
         public virtual IClientRepository ClientRepository { get; set; }
         public virtual ITenantRepository TenantRepository { get; set; }
         public virtual ITenantUserRepository TenantUserRepository { get; set; }
+        public virtual IInsuranceRepository InsuranceRepository { get; set; }
 
         public GlobalUnitOfWork()
         {
@@ -26,6 +27,7 @@ namespace Psi.Infra.Data.Repositories
             ClientRepository = new ClientRepository(db);
             TenantRepository = new TenantRepository(db);
             TenantUserRepository = new TenantUserRepository(db);
+            InsuranceRepository = new InsuranceRepository(db);
         }
 
         public GlobalUnitOfWork InNewContext()

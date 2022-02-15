@@ -169,6 +169,52 @@ namespace Psi.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Insurance",
+                columns: table => new
+                {
+                    InsuranceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenantFk = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Insurance", x => x.InsuranceId);
+                    table.ForeignKey(
+                        name: "FK_Insurance_Tenants_TenantFk",
+                        column: x => x.TenantFk,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TenantUsers",
+                columns: table => new
+                {
+                    TenantUserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserFk = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TenantFk = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenantUsers", x => x.TenantUserId);
+                    table.ForeignKey(
+                        name: "FK_TenantUsers_AspNetUsers_UserFk",
+                        column: x => x.UserFk,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TenantUsers_Tenants_TenantFk",
+                        column: x => x.TenantFk,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
                 {
@@ -212,33 +258,13 @@ namespace Psi.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Clients", x => x.ClientId);
                     table.ForeignKey(
+                        name: "FK_Clients_Insurance_InsuranceFk",
+                        column: x => x.InsuranceFk,
+                        principalTable: "Insurance",
+                        principalColumn: "InsuranceId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Clients_Tenants_TenantFk",
-                        column: x => x.TenantFk,
-                        principalTable: "Tenants",
-                        principalColumn: "TenantId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TenantUsers",
-                columns: table => new
-                {
-                    TenantUserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserFk = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TenantFk = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TenantUsers", x => x.TenantUserId);
-                    table.ForeignKey(
-                        name: "FK_TenantUsers_AspNetUsers_UserFk",
-                        column: x => x.UserFk,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TenantUsers_Tenants_TenantFk",
                         column: x => x.TenantFk,
                         principalTable: "Tenants",
                         principalColumn: "TenantId",
@@ -285,8 +311,18 @@ namespace Psi.Infra.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_InsuranceFk",
+                table: "Clients",
+                column: "InsuranceFk");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_TenantFk",
                 table: "Clients",
+                column: "TenantFk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Insurance_TenantFk",
+                table: "Insurance",
                 column: "TenantFk");
 
             migrationBuilder.CreateIndex(
@@ -325,6 +361,9 @@ namespace Psi.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Insurance");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

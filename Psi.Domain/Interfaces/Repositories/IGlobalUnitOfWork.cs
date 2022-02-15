@@ -11,5 +11,6 @@ namespace Psi.Domain.Interfaces.Repositories
         IClientRepository ClientRepository { get; set; }
         ITenantRepository TenantRepository { get; set; }
         ITenantUserRepository TenantUserRepository { get; set; }
+        IInsuranceRepository InsuranceRepository { get; set; }
     }
 }

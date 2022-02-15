@@ -99,9 +99,11 @@ namespace Psi.API
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ITenantRepository, TenantRepository>();
             services.AddScoped<ITenantUserRepository, TenantUserRepository>();
+            services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<ITenantService, TenantService>();
+            services.AddScoped<IConfigService, ConfigService>();
 
             //Add Swagger
             services.AddSwaggerGen(c =>

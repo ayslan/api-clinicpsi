@@ -37,7 +37,11 @@ namespace Psi.Service.Services
 
             _globalUoW.TenantRepository.Insert(tenant);
 
+            //Add relação usuario x tenant
             await AddUserToTenant(tenant.TenantId, userId);
+
+            //Add convenio Particular padrão
+            _globalUoW.InsuranceRepository.Insert(new Insurance { Name = "Particular", TenantFk = tenant.TenantId });
 
             return _mapper.Map<TenantModel>(tenant);
         }
