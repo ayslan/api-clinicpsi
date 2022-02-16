@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Psi.Infra.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,20 @@ namespace Psi.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    CityId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.CityId);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,9 +257,10 @@ namespace Psi.Infra.Data.Migrations
                     Number = table.Column<int>(type: "int", nullable: true),
                     Complement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityFk = table.Column<int>(type: "int", nullable: false),
+                    ForeignCityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ForeignStateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InsuranceFk = table.Column<int>(type: "int", nullable: true),
                     ServicePrice = table.Column<float>(type: "real", nullable: true),
                     InsuranceTransferType = table.Column<int>(type: "int", nullable: true),
@@ -257,6 +272,12 @@ namespace Psi.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.ClientId);
+                    table.ForeignKey(
+                        name: "FK_Clients_Cities_CityFk",
+                        column: x => x.CityFk,
+                        principalTable: "Cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_Insurance_InsuranceFk",
                         column: x => x.InsuranceFk,
@@ -311,6 +332,11 @@ namespace Psi.Infra.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_CityFk",
+                table: "Clients",
+                column: "CityFk");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_InsuranceFk",
                 table: "Clients",
                 column: "InsuranceFk");
@@ -361,6 +387,9 @@ namespace Psi.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Insurance");

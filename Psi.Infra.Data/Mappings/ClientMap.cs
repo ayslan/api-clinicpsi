@@ -22,6 +22,10 @@ namespace Psi.Infra.Data.Mappings
             builder.HasOne(x => x.Insurance)
                 .WithMany()
                 .HasForeignKey(x => x.InsuranceFk);
+
+            builder.HasOne(x => x.City)
+               .WithMany()
+               .HasForeignKey(x => x.CityFk);
         }
     }
 }

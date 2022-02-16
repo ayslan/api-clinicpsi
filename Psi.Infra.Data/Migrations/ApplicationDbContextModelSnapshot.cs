@@ -225,6 +225,26 @@ namespace Psi.Infra.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Psi.Domain.Entities.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CityId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Psi.Domain.Entities.Client", b =>
                 {
                     b.Property<int>("ClientId")
@@ -242,8 +262,8 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CityFk")
+                        .HasColumnType("int");
 
                     b.Property<string>("Complement")
                         .HasColumnType("nvarchar(max)");
@@ -267,6 +287,12 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmergencyPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ForeignCityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ForeignStateName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -316,9 +342,6 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<float?>("ServicePrice")
                         .HasColumnType("real");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -335,6 +358,8 @@ namespace Psi.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClientId");
+
+                    b.HasIndex("CityFk");
 
                     b.HasIndex("InsuranceFk");
 
@@ -456,6 +481,12 @@ namespace Psi.Infra.Data.Migrations
 
             modelBuilder.Entity("Psi.Domain.Entities.Client", b =>
                 {
+                    b.HasOne("Psi.Domain.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Psi.Domain.Entities.Insurance", "Insurance")
                         .WithMany()
                         .HasForeignKey("InsuranceFk");
@@ -465,6 +496,8 @@ namespace Psi.Infra.Data.Migrations
                         .HasForeignKey("TenantFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("City");
 
                     b.Navigation("Insurance");
 

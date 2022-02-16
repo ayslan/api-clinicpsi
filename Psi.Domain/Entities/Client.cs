@@ -35,9 +35,10 @@ namespace Psi.Domain.Entities
         public int? Number { get; set; }
         public string Complement { get; set; }
         public string District { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
         public string Country { get; set; }
+        public int CityFk { get; set; }
+        public string ForeignCityName { get; set; }
+        public string ForeignStateName { get; set; }
 
         //Payment
         public int? InsuranceFk { get; set; }
@@ -55,5 +56,6 @@ namespace Psi.Domain.Entities
         //virtual
         public virtual Tenant Tenant { get; set; } 
         public virtual Insurance Insurance { get; set; }
+        public virtual City City { get; set; }
     }
 }
