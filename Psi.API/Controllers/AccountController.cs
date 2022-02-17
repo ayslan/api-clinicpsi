@@ -21,24 +21,18 @@ namespace Psi.API.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly AppConfiguration _appConfiguration;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IMapper _mapper;
-
         private readonly ITenantService _tenantService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IMapper mapper, IOptions<AppConfiguration> appConfiguration,
-            ITenantService tenantService)
+        public AccountController(UserManager<ApplicationUser> userManager, ITenantService tenantService)
         {
             _userManager = userManager;
-            _mapper = mapper;
-            _appConfiguration = appConfiguration.Value;
             _tenantService = tenantService;
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterUserModel model)
+        public async Task<IActionResult> Post(RegisterUserModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -74,38 +68,6 @@ namespace Psi.API.Controllers
             }
             catch (Exception ex)
             {
-                return Response();
-            }
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel model)
-        {
-            var body = new Dictionary<string, string>
-            {
-                {"grant_type", "password" },
-                {"username", model.Email },
-                {"password", model.Password },
-                {"client_id", _appConfiguration.ClientID },
-                {"client_secret", _appConfiguration.ClientSecret },
-                {"scope", _appConfiguration.Scope }
-            };
-
-            var urlLogin = _appConfiguration.BaseURL + "/connect/token";
-            var parsedBody = UtilRest.CreateFormBody(body);
-            var result = UtilRest.RequestClient(Method.POST, urlLogin, parsedBody, "application/x-www-form-urlencoded");
-
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                var userModel = _mapper.Map<ApplicationUserModel>(user);
-
-                return OkResponse(result.Content, userModel);
-            }
-            else
-            {
-                ModelState.AddModelError("LOGINERROR", "Email e/ou Senha incorretos!");
                 return Response();
             }
         }

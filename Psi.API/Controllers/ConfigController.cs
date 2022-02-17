@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Psi.API.Controllers
 {
+    [Route("/api")]
     public class ConfigController : BaseController
     {
         public readonly IConfigService _configService;
