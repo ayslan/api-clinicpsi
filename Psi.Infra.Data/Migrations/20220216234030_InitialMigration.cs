@@ -64,6 +64,23 @@ namespace Psi.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    CountryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EnglishName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ISOCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneCode = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.CountryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tenants",
                 columns: table => new
                 {
@@ -257,8 +274,8 @@ namespace Psi.Infra.Data.Migrations
                     Number = table.Column<int>(type: "int", nullable: true),
                     Complement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityFk = table.Column<int>(type: "int", nullable: false),
+                    CountryFk = table.Column<int>(type: "int", nullable: true),
+                    CityFk = table.Column<int>(type: "int", nullable: true),
                     ForeignCityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForeignStateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InsuranceFk = table.Column<int>(type: "int", nullable: true),
@@ -277,7 +294,13 @@ namespace Psi.Infra.Data.Migrations
                         column: x => x.CityFk,
                         principalTable: "Cities",
                         principalColumn: "CityId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Clients_Countries_CountryFk",
+                        column: x => x.CountryFk,
+                        principalTable: "Countries",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Clients_Insurance_InsuranceFk",
                         column: x => x.InsuranceFk,
@@ -337,6 +360,11 @@ namespace Psi.Infra.Data.Migrations
                 column: "CityFk");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_CountryFk",
+                table: "Clients",
+                column: "CountryFk");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_InsuranceFk",
                 table: "Clients",
                 column: "InsuranceFk");
@@ -390,6 +418,9 @@ namespace Psi.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "Insurance");

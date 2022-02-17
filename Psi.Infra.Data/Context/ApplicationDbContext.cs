@@ -36,6 +36,7 @@ namespace Psi.Infra.Data.Context
         public virtual DbSet<TenantUser> TenantUsers { get; set; }
         public virtual DbSet<Insurance> Insurance { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -46,6 +47,7 @@ namespace Psi.Infra.Data.Context
             builder.Entity<TenantUser>(new TenantUserMap().Configure);
             builder.Entity<Insurance>(new InsuranceMap().Configure);
             builder.Entity<City>(new CityMap().Configure);
+            builder.Entity<Country>(new CountryMap().Configure);
         }
     }
 }

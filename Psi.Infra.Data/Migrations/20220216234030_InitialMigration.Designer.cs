@@ -10,7 +10,7 @@ using Psi.Infra.Data.Context;
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220216231304_InitialMigration")]
+    [Migration("20220216234030_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -264,14 +264,14 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CityFk")
+                    b.Property<int?>("CityFk")
                         .HasColumnType("int");
 
                     b.Property<string>("Complement")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CountryFk")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreationDateUtc")
                         .HasColumnType("datetime2");
@@ -363,11 +363,41 @@ namespace Psi.Infra.Data.Migrations
 
                     b.HasIndex("CityFk");
 
+                    b.HasIndex("CountryFk");
+
                     b.HasIndex("InsuranceFk");
 
                     b.HasIndex("TenantFk");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Psi.Domain.Entities.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ISOCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PhoneCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Psi.Domain.Entities.Insurance", b =>
@@ -485,9 +515,11 @@ namespace Psi.Infra.Data.Migrations
                 {
                     b.HasOne("Psi.Domain.Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityFk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityFk");
+
+                    b.HasOne("Psi.Domain.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryFk");
 
                     b.HasOne("Psi.Domain.Entities.Insurance", "Insurance")
                         .WithMany()
@@ -500,6 +532,8 @@ namespace Psi.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+
+                    b.Navigation("Country");
 
                     b.Navigation("Insurance");
 
