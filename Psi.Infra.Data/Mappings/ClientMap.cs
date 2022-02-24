@@ -10,10 +10,10 @@ namespace Psi.Infra.Data.Mappings
         {
             builder.HasKey(c => c.ClientId);
             builder.Property(c => c.Name).IsRequired();
-            builder.Property(c => c.BirthDate).IsRequired();
             builder.Property(c => c.Gender).IsRequired();
+            builder.Property(c => c.AgeGroup).IsRequired();
             builder.Property(c => c.Status).IsRequired();
-            builder.Property(c => c.Phone).IsRequired();
+            builder.Property(c => c.BirthDate).HasColumnType("date");
 
             builder.HasOne(d => d.Tenant)
               .WithMany(p => p.Clients)
