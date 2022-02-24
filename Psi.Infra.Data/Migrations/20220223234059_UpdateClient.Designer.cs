@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Psi.Infra.Data.Context;
 
 namespace Psi.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220223234059_UpdateClient")]
+    partial class UpdateClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,7 +264,7 @@ namespace Psi.Infra.Data.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ChargeType")
+                    b.Property<int>("ChargeType")
                         .HasColumnType("int");
 
                     b.Property<int?>("CityFk")

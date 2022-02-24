@@ -40,10 +40,15 @@ namespace Psi.Domain.Entities
         public string ForeignCityName { get; set; }
         public string ForeignStateName { get; set; }
 
-        //Payment
-        public int? InsuranceFk { get; set; }
+        //Billing
+        public ChargeTypeEnum? ChargeType { get; set; }
         public float? ServicePrice { get; set; }
-        public CalculationTypeEnum? InsuranceTransferType { get; set; } 
+        public float? ServicePackagePrice { get; set; }
+        public int? QtyPackageServices { get; set; }
+
+        //Insurance - ainda não implementado
+        public int? InsuranceFk { get; set; }
+        public CalculationTypeEnum? InsuranceTransferType { get; set; }
         public float? InsuranceTransferValue { get; set; }
 
         //Emergency contact
@@ -54,7 +59,7 @@ namespace Psi.Domain.Entities
         public int TenantFk { get; set; }
 
         //virtual
-        public virtual Tenant Tenant { get; set; } 
+        public virtual Tenant Tenant { get; set; }
         public virtual Insurance Insurance { get; set; }
         public virtual Country Country { get; set; }
         public virtual City City { get; set; }
