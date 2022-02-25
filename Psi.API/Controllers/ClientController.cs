@@ -41,12 +41,20 @@ namespace Psi.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(ClientModel clientModel)
+        public IActionResult Register(ClientModelRequest clientModel)
         {
             clientModel.TenantFk = User.Identity.GetCurrentTenantId();
             clientModel.CreationDateUtc = DateTime.UtcNow;
 
             var result = _clientService.Register(clientModel);
+
+            return Response(result);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] ClientModelRequest clientModel)
+        {
+            var result = _clientService.Update(id, clientModel);
 
             return Response(result);
         }

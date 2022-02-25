@@ -14,5 +14,7 @@ namespace Psi.Domain.Interfaces.Repositories
         IInsuranceRepository InsuranceRepository { get; set; }
         ICityRepository CityRepository { get; set; }
         ICountryRepository CountryRepository { get; set; }
+        void Commit();
+        Task CommitAsync();
     }
 }

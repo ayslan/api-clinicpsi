@@ -11,6 +11,7 @@ namespace Psi.Domain.Interfaces.Services
     {
         List<ClientModel> List(int tenantId);
         ClientModel GetByUserId(int id);
-        ClientModel Register(ClientModel clientModel);
+        ClientModel Register(ClientModelRequest clientModel);
+        ClientModel Update(int id, ClientModelRequest clientModel);
     }
 }

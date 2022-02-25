@@ -29,10 +29,21 @@ namespace Psi.Service.Services
 
         public ClientModel GetByUserId(int id) => _mapper.Map<ClientModel>(_globalUoW.ClientRepository.Find(id));
 
-        public ClientModel Register(ClientModel clientModel)
+        public ClientModel Register(ClientModelRequest clientModel)
         {
             var client = _mapper.Map<Client>(clientModel);
             _globalUoW.ClientRepository.Insert(client);
+
+            return _mapper.Map<ClientModel>(client); ;
+        }
+
+        public ClientModel Update(int id, ClientModelRequest clientModel)
+        {
+            var client = _globalUoW.ClientRepository.Find(id);
+            _mapper.Map(clientModel, client);
+
+            _globalUoW.ClientRepository.Update(client);
+            _globalUoW.Commit();
 
             return _mapper.Map<ClientModel>(client); ;
         }

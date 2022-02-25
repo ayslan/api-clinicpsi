@@ -1,4 +1,5 @@
-﻿using Psi.Domain.Interfaces.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using Psi.Domain.Interfaces.Repository;
 using Psi.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -48,11 +49,19 @@ namespace Psi.Infra.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public TEntity Find(int id) =>
-            _db.Set<TEntity>().Find(id);
+        public TEntity Find(int id)
+        {
+            var entity = _db.Set<TEntity>().Find(id);
+            _db.Entry(entity).State = EntityState.Detached;
+            return entity;
+        }
 
-        public async Task<TEntity> FindAsync(int id) =>
-           await _db.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity> FindAsync(int id)
+        {
+            var entity = await _db.Set<TEntity>().FindAsync(id);
+            _db.Entry(entity).State = EntityState.Detached;
+            return entity;
+        }
 
         public async Task<TEntity> FindAsync(string id) =>
          await _db.Set<TEntity>().FindAsync(id);
