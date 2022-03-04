@@ -58,5 +58,13 @@ namespace Psi.API.Controllers
 
             return Response(result);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var result = _clientService.DeleteById(id);
+
+            return result > 0 ? OkResponse() : ResponseBadRequest();
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace Psi.Service.Services
 
             return _mapper.Map<ClientModel>(client); ;
         }
+
+        public int DeleteById(int id)
+        {
+            return _globalUoW.ClientRepository.DeleteById(id);
+        }
     }
 }

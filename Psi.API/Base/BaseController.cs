@@ -22,6 +22,17 @@ namespace Psi.API.Base
                    o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
         }
 
+        protected IActionResult ResponseBadRequest()
+        {
+            HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            return new JsonResult(new
+            {
+                success = false,
+                errors = new { ErrorCode = "ERRO", Message = "Erro ao realizar operação" }
+            });
+        }
+
         protected IActionResult ResponseBadRequest(object result)
         {
             var type = result.GetType();

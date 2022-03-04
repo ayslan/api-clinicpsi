@@ -27,13 +27,13 @@ namespace Psi.Infra.Data.Repositories
 
         public void Update(TEntity obj)
         {
-            _db.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.Entry(obj).State = EntityState.Modified;
             _db.SaveChanges();
         }
 
         public async Task UpdateAsync(TEntity obj)
         {
-            _db.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.Entry(obj).State = EntityState.Modified;
             await _db.SaveChangesAsync();
         }
 

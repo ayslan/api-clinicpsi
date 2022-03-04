@@ -15,5 +15,10 @@ namespace Psi.Infra.Data.Repositories
         {
             return _db.Clients.Where(x => x.TenantFk == tenantId).OrderBy(x => x.Name).ToList();
         }
+
+        public int DeleteById(int id)
+        {
+            return _db.Clients.Where(x => x.ClientId == id).DeleteFromQuery();
+        }
     }
 }
