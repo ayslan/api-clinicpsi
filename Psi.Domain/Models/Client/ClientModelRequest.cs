@@ -36,6 +36,7 @@ namespace Psi.Domain.Models.Client
         public string Complement { get; set; }
         public string District { get; set; }
         public int? CountryFk { get; set; }
+        public string State { get; set; }
         public int? CityFk { get; set; }
         public string ForeignCityName { get; set; }
         public string ForeignStateName { get; set; }
