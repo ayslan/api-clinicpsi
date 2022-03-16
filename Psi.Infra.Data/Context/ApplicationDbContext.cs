@@ -37,6 +37,9 @@ namespace Psi.Infra.Data.Context
         public virtual DbSet<Insurance> Insurance { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Anamnesis> Anamnesis { get; set; }
+        public virtual DbSet<AnamnesisTopic> AnamnesisTopics { get; set; }  
+        public virtual DbSet<AnamnesisField> AnamnesisFields { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -48,6 +51,10 @@ namespace Psi.Infra.Data.Context
             builder.Entity<Insurance>(new InsuranceMap().Configure);
             builder.Entity<City>(new CityMap().Configure);
             builder.Entity<Country>(new CountryMap().Configure);
+            builder.Entity<Anamnesis>(new AnamnesisMap().Configure);
+            builder.Entity<AnamnesisTopic>(new AnamnesisTopicMap().Configure);
+            builder.Entity<AnamnesisField>(new AnamnesisFieldMap().Configure);
+
         }
     }
 }

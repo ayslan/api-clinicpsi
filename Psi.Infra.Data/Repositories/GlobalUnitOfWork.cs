@@ -17,6 +17,7 @@ namespace Psi.Infra.Data.Repositories
         public virtual IInsuranceRepository InsuranceRepository { get; set; }
         public virtual ICityRepository CityRepository { get; set; }
         public virtual ICountryRepository CountryRepository { get; set; }
+        public virtual IAnamnesisRepository AnamnesisRepository { get; set; }
 
         public GlobalUnitOfWork()
         {
@@ -32,6 +33,7 @@ namespace Psi.Infra.Data.Repositories
             InsuranceRepository = new InsuranceRepository(db);
             CityRepository = new CityRepository(db);
             CountryRepository = new CountryRepository(db);
+            AnamnesisRepository = new AnamnesisRepository(db);
         }
 
         public GlobalUnitOfWork InNewContext()

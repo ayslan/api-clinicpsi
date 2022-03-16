@@ -102,6 +102,7 @@ namespace Psi.API
             services.AddScoped<IInsuranceRepository, InsuranceRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IAnamnesisRepository, AnamnesisRepository>();
 
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<ITenantService, TenantService>();
