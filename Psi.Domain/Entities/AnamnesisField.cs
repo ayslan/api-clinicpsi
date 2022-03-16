@@ -13,6 +13,7 @@ namespace Psi.Domain.Entities
         public string Title { get; set; }   
         public int Order { get; set; }
         public AnamnesisFieldTypeEnum AnamnesisFieldType { get; set; }
+        public string Info { get; set; }
 
         public int AnamnesisTopicFk { get; set; }
 

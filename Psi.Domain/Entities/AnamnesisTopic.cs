@@ -9,7 +9,7 @@ namespace Psi.Domain.Entities
     public class AnamnesisTopic
     {
         public int AnamnesisTopicId { get; set; }
-        public int Name { get; set; }   
+        public string Name { get; set; }   
         public int Order { get; set; }
 
         public int AnamnesisFk { get; set; }
