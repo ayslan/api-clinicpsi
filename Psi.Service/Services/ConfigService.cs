@@ -17,27 +17,5 @@ namespace Psi.Service.Services
         {
             _globalUoW = globalUoW;
         }
-
-        public Insurance AddInsurance(Insurance insurance)
-        {
-            _globalUoW.InsuranceRepository.Insert(insurance);
-
-            return insurance;
-        }
-
-        public Insurance GetInsurance(int id)
-        {
-            return _globalUoW.InsuranceRepository.Find(id);
-        }
-
-        public List<Insurance> ListInsurance(int tenantId)
-        {
-            return _globalUoW.InsuranceRepository.ListByTenantId(tenantId);
-        }
-
-        public void DeleteInsurance(int id)
-        {
-            _globalUoW.InsuranceRepository.Delete(id);
-        }
     }
 }

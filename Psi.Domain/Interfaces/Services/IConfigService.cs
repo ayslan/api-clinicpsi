@@ -9,9 +9,6 @@ namespace Psi.Domain.Interfaces.Services
 {
     public interface IConfigService
     {
-        Insurance AddInsurance(Insurance insurance);
-        Insurance GetInsurance(int id);
-        List<Insurance> ListInsurance(int tenantId);
-        void DeleteInsurance(int id);
+      
     }
 }

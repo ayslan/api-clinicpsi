@@ -18,13 +18,5 @@ namespace Psi.API.Controllers
         {
             _configService = configService;
         }
-
-        [HttpGet("insurace")]
-        public IActionResult ListInsurance()
-        {
-            var tenantId = User.Identity.GetCurrentTenantId();
-
-            return Response(_configService.ListInsurance(tenantId));
-        }
     }
 }

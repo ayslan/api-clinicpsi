@@ -108,6 +108,7 @@ namespace Psi.API
             services.AddScoped<ITenantService, TenantService>();
             services.AddScoped<IConfigService, ConfigService>();
             services.AddScoped<ISystemService, SystemService>();
+            services.AddScoped<IAnamnesisService, AnamnesisService>();
 
             //Add Swagger
             services.AddSwaggerGen(c =>

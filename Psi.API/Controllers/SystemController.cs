@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Psi.API.Base;
 using Psi.Domain.Interfaces.Services;
 using System;
@@ -30,6 +31,23 @@ namespace Psi.API.Controllers
         public IActionResult ListCountries()
         {
             return Response(_systemService.ListCountries());
+        }
+
+        [HttpGet("info")]
+        [AllowAnonymous]
+        public IActionResult SystemInfo()
+        {
+            var teste = new string[] { "opcao1", "opcao2", "opcao3" };
+            var strTeste = JsonConvert.SerializeObject(teste);
+
+            var novo = JsonConvert.DeserializeObject<string[]>("[\"opcao1\",\"opcao2\",\"opcao3\"]");
+
+            var result = new
+            {
+                teste = JsonConvert.SerializeObject(teste)
+            };
+
+            return Response(result);
         }
     }
 }

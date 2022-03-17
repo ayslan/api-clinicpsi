@@ -10,5 +10,8 @@ namespace Psi.Domain.Interfaces.Repositories
 {
     public interface IAnamnesisRepository : IBaseRepository<Anamnesis>
     {
+        List<Anamnesis> ListAnamnesisByTenantId(int tenantId);
+        void InsertTopic(AnamnesisTopic anamnesisTopic);
+        void InsertField(AnamnesisField anamnesisField);
     }
 }
