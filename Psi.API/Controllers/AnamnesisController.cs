@@ -16,10 +16,9 @@ namespace Psi.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult List()
         {
-            var tenantId = 1;// User.Identity.GetCurrentTenantId();
+            var tenantId = User.Identity.GetCurrentTenantId();
             var result = _anamnesisService.ListAnamnesisByTenantId(tenantId);
 
             return Response(result);
